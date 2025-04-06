@@ -5,10 +5,25 @@ export const loadDictionary = async () => {
 
 export const findWords = async (letters, minLength = 3) => {
   const dictionary = await loadDictionary();
-  const lettersSet = new Set(letters.toLowerCase());
-  return dictionary.filter(
-    (word) =>
-      word.length >= minLength &&
-      [...word].every((char) => lettersSet.has(char))
-  );
+
+  const lettersCount = {};
+  for (const char of letters.toLowerCase()) {
+    lettersCount[char] = (lettersCount[char] || 0) + 1;
+  }
+
+  return dictionary
+    .filter((word) => {
+      if (word.length < minLength) return false;
+      const remainingLetters = { ...lettersCount };
+
+      for (const char of word.toLowerCase()) {
+        if (!remainingLetters[char] || remainingLetters[char] <= 0) {
+          return false;
+        }
+        remainingLetters[char]--;
+      }
+
+      return true;
+    })
+    .sort((a, b) => b.length - a.length);
 };

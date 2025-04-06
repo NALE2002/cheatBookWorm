@@ -26,7 +26,7 @@ function Hero() {
       <section className="min-h-screen" id="Hero">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center justify-center min-h-screen py-10">
-            <h1 className="text-gray-200 text-6xl font-extrabold mb-10">
+            <h1 className="text-gray-200 text-6xl font-extrabold mb-16">
               Inserisci le lettere <span className="underline">NEGRO</span>!
             </h1>
             <form onSubmit={handleSubmit} className="mb-10">
@@ -37,7 +37,7 @@ function Hero() {
                 />
                 <button
                   type="submit"
-                  className="bg-blue-600 text-2xl font-semibold px-6 rounded-r-lg hover:cursor-pointer hover:bg-blue-500 hover:text-gray-200 duration-200"
+                  className="bg-blue-600 text-2xl font-semibold px-6 rounded-r-lg hover:cursor-pointer hover:bg-blue-500 hover:text-gray-200 duration-200 shadow-md shadow-black"
                 >
                   {isLoading ? "Sto cercando... " : "Send"}
                 </button>
@@ -47,7 +47,7 @@ function Hero() {
               className="max-w-4xl"
               style={{ display: words.length === 0 ? "none" : "" }}
             >
-              <ul className="flex flex-wrap bg-white gap-2 px-10 py-5 font-semibold text-xl rounded-lg">
+              <ul className="flex flex-wrap bg-white gap-2 px-10 py-5 font-semibold text-xl rounded-lg shadow-lg shadow-black">
                 {words.map((word) => (
                   <li key={word}>{word}</li>
                 ))}
