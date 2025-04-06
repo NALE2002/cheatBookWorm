@@ -1,29 +1,58 @@
+import { useEffect, useState } from "react";
 import WordInputField from "./WordInputField";
+import { findWords } from "../utils/wordFinder";
 
 function Hero() {
+  const [letters, setLetters] = useState("");
+  const [words, setWords] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const validWords = await findWords(letters);
+      setWords(validWords);
+    } catch (error) {
+      console.error("Errore: ", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-  
+
   return (
     <>
-      <section className="h-screen" id="Hero">
-        <div className="mx-auto max-w-6xl h-full">
-          <div className="flex flex-col items-center justify-center h-full space-y-20">
-            <h1 className="text-gray-200 text-6xl font-extrabold">
+      <section className="min-h-screen" id="Hero">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col items-center justify-center min-h-screen py-10">
+            <h1 className="text-gray-200 text-6xl font-extrabold mb-10">
               Inserisci le lettere <span className="underline">NEGRO</span>!
             </h1>
-            <form onSubmit={handleSubmit}>
-              <div className="flex flex-row mb-30">
-                <WordInputField />
+            <form onSubmit={handleSubmit} className="mb-10">
+              <div className="flex flex-row ">
+                <WordInputField
+                  value={letters}
+                  onChange={(e) => setLetters(e.target.value)}
+                />
                 <button
                   type="submit"
                   className="bg-blue-600 text-2xl font-semibold px-6 rounded-r-lg hover:cursor-pointer hover:bg-blue-500 hover:text-gray-200 duration-200"
                 >
-                  Send
+                  {isLoading ? "Sto cercando... " : "Send"}
                 </button>
               </div>
             </form>
+            <div
+              className="max-w-4xl"
+              style={{ display: words.length === 0 ? "none" : "" }}
+            >
+              <ul className="flex flex-wrap bg-white gap-2 px-10 py-5 font-semibold text-xl rounded-lg">
+                {words.map((word) => (
+                  <li key={word}>{word}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

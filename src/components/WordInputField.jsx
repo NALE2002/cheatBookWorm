@@ -1,23 +1,13 @@
-import { useEffect } from "react";
-import { useState } from "react";
-
-function WordInputField() {
-
-  const [letters, setLetters] = useState("");
-
-  useEffect(() => {
-    console.log("lettere: ",letters);
-  })
-
+function WordInputField({ value, onChange }) {
   return (
     <>
       <input
         type="text"
-        className="bg-white outline-none p-2 text-4xl text-black text-center"
+        className="bg-white outline-none p-2 text-4xl text-black text-center leading-none"
         minLength={3}
         maxLength={16}
-        onChange={(e) => setLetters(e.target.value)}
-        value={letters}
+        value={value}
+        onChange={onChange}
       />
     </>
   );
