@@ -25,11 +25,16 @@ function Hero() {
     <>
       <section className="min-h-screen" id="Hero">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-center justify-center min-h-screen py-10">
+          <div className="flex flex-col items-center justify-center min-h-screen pt-10 pb-24">
+            <img
+              src="/src/image/bookwormIMG-Photoroom.png"
+              alt="bookworm"
+              className="object-cover size-100"
+            />
             <h1 className="text-gray-200 text-6xl font-extrabold mb-16">
               Inserisci le lettere <span className="underline">NEGRO</span>!
             </h1>
-            <form onSubmit={handleSubmit} className="mb-10">
+            <form onSubmit={handleSubmit} className="mb-16">
               <div className="flex flex-row ">
                 <WordInputField
                   value={letters}
@@ -39,7 +44,7 @@ function Hero() {
                   type="submit"
                   className="bg-blue-600 text-2xl font-semibold px-6 rounded-r-lg hover:cursor-pointer hover:bg-blue-500 hover:text-gray-200 duration-200 shadow-md shadow-black"
                 >
-                  {isLoading ? "Sto cercando... " : "Send"}
+                  {isLoading ? "Sto cercando... " : "Invia"}
                 </button>
               </div>
             </form>
